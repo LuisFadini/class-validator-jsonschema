@@ -8,6 +8,7 @@ import type { ReferenceObject, SchemaObject } from 'openapi3-ts'
 import { getMetadataSchema } from './decorators'
 import { defaultConverters } from './defaultConverters'
 import { defaultOptions, IOptions } from './options'
+import { ExposeMetadata } from 'class-transformer'
 
 export { JSONSchema } from './decorators'
 
@@ -64,6 +65,26 @@ export function validationMetadataArrayToSchemas(
             isExcluded({ ...propMeta, target }, options)
           )
       )
+      .map((propMeta) => {
+        /**
+         * Retrieves all properties that have the Expose decorator from class-transformer
+         * and remaps the property names to the names exposed by the Expose decorator.
+         */
+        const exposeMetadata =
+          userOptions?.classTransformerMetadataStorage?.getExposedMetadatas(
+            propMeta.target as any
+          )
+
+        const ctMetaForField = exposeMetadata?.find(
+          (meta: ExposeMetadata) => meta.propertyName === propMeta.propertyName
+        )
+
+        if (ctMetaForField?.options.name) {
+          propMeta.propertyName = ctMetaForField.options.name
+        }
+
+        return propMeta
+      })
 
     const properties: { [name: string]: ReferenceObject | SchemaObject } = {}
 
