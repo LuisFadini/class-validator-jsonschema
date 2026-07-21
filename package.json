@@ -1,5 +1,5 @@
 {
-  "name": "class-validator-jsonschema",
+  "name": "@luisfadini/class-validator-jsonschema",
   "version": "5.1.0",
   "description": "Convert class-validator-decorated classes into JSON schema",
   "keywords": [
@@ -10,16 +10,16 @@
   ],
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "repository": "git@github.com:epiphone/class-validator-jsonschema.git",
-  "author": "Aleksi Pekkala <aleksipekkala@gmail.com>",
+  "repository": "git@github.com:luisfadini/class-validator-jsonschema.git",
+  "author": "Luís Otávio <84397555+LuisFadini@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
     "clean": "rimraf build",
-    "build": "npm run clean && tsc -p tsconfig.release.json",
+    "build": "pnpm clean && tsc -p tsconfig.release.json",
+    "prepare": "pnpm build",
     "format": "prettier --write {src,__tests__}/**/*.ts",
     "test:format": "prettier --check {src,__tests__}/**/*.ts",
     "test:lint": "tslint --project . src/**/*.ts",
-    "prepare": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -56,5 +56,6 @@
   "peerDependencies": {
     "class-transformer": "^0.4.0 || ^0.5.0",
     "class-validator": "^0.14.0"
-  }
+  },
+  "packageManager": "pnpm@10.20.0+sha512.cf9998222162dd85864d0a8102e7892e7ba4ceadebbf5a31f9c2fce48dfce317a9c53b9f6464d1ef9042cba2e02ae02a9f7c143a2b438cd93c91840f0192b9dd"
 }
