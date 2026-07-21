@@ -10,30 +10,31 @@ import {
   MetadataStorage,
   ValidateNested,
 } from 'class-validator'
-import _get from 'lodash.get'
 
 import { validationMetadatasToSchemas } from '../src'
 
 class User {
   @IsDefined()
   @IsString()
-  id: string
+  id!: string
 
-  @IsEmail() email: string
+  @IsEmail() email!: string
 
   @IsOptional()
   @MaxLength(20, { each: true })
-  tags: string[]
+  tags?: string[]
 }
 
-// @ts-ignore: not referenced
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Post {
   @IsOptional()
   @ValidateNested()
-  user: User
+  user?: User
 }
 
-const metadata = _get(getFromContainer(MetadataStorage), 'validationMetadatas')
+// @ts-ignore
+const metadata = getFromContainer(MetadataStorage).validationMetadatas
 const defaultSchemas = validationMetadatasToSchemas(metadata)
 
 describe('options', () => {

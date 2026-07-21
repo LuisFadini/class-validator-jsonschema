@@ -16,19 +16,21 @@ export class CustomTextLength implements ValidatorConstraintInterface {
   }
 }
 
-// @ts-ignore: not referenced
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Post {
   @Validate(CustomTextLength, [0, 11])
-  title: string
+  title!: string
 }
 
-// @ts-ignore: not referenced
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class InvalidPost {
   @Validate(CustomTextLength, [0, 11])
-  titleNumber: number
+  titleNumber!: number
 
   @Validate(CustomTextLength, [0, 11])
-  titleBoolean: boolean
+  titleBoolean!: boolean
 }
 
 describe('custom validation classes', () => {

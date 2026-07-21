@@ -1,28 +1,29 @@
-// tslint:disable:no-submodule-imports
 import { IsString, MinLength, ValidateNested } from 'class-validator'
 import { validationMetadatasToSchemas } from '../src'
 import { Type } from 'class-transformer'
-const { defaultMetadataStorage } = require('class-transformer/cjs/storage')
+import { defaultMetadataStorage } from 'class-transformer/cjs/storage'
 
 class User {
   @IsString()
-  name: string
+  name!: string
 }
 
-// @ts-ignore: not referenced
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class Post {
   @Type(() => {
     return String
   })
   @MinLength(2, { each: true })
-  userStatus: Map<string, string>
+  userStatus!: Map<string, string>
 }
 
-// @ts-ignore: not referenced
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class PostWidthUsers {
   @ValidateNested({ each: true })
   @Type(() => User)
-  users: Map<string, User>
+  users!: Map<string, User>
 }
 
 describe('classValidatorConverter', () => {

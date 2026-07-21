@@ -371,7 +371,7 @@ function getPropType(target: object, property: string) {
   return Reflect.getMetadata('design:type', target, property)
 }
 
-function constraintToSchema(primitive: any): SchemaObject | void {
+function constraintToSchema(primitive: unknown): SchemaObject | void {
   const primitives = ['string', 'number', 'boolean']
   const type = typeof primitive
   if (primitives.includes(type)) {
@@ -380,7 +380,7 @@ function constraintToSchema(primitive: any): SchemaObject | void {
 }
 
 function targetToSchema(
-  type: any,
+  type: unknown,
   options: IOptions
 ): ReferenceObject | SchemaObject | void {
   if (typeof type === 'function') {

@@ -72,7 +72,7 @@ export function validationMetadataArrayToSchemas(
          */
         const exposeMetadata =
           userOptions?.classTransformerMetadataStorage?.getExposedMetadatas(
-            propMeta.target as any
+            propMeta.target as Function
           )
 
         const ctMetaForField = exposeMetadata?.find(

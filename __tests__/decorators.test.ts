@@ -1,4 +1,3 @@
-// tslint:disable:no-submodule-imports
 import {
   ArrayMaxSize,
   ArrayNotContains,
@@ -8,7 +7,6 @@ import {
   MaxLength,
   MetadataStorage,
 } from 'class-validator'
-import _get from 'lodash.get'
 
 import { JSONSchema, validationMetadatasToSchemas } from '../src'
 
@@ -17,7 +15,9 @@ import { JSONSchema, validationMetadatasToSchemas } from '../src'
   description: 'A User object',
   example: { id: '123' },
 })
-// @ts-ignore: not referenced
+
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class User {
   @JSONSchema({
     default: '1',
@@ -25,7 +25,7 @@ class User {
     pattern: '.*',
   })
   @IsMongoId()
-  id: string
+  id!: string
 
   @MaxLength(20, { each: true })
   @ArrayMaxSize(5)
@@ -42,7 +42,8 @@ class User {
   empty?: string
 }
 
-const metadata = _get(getFromContainer(MetadataStorage), 'validationMetadatas')
+// @ts-ignore
+const metadata = getFromContainer(MetadataStorage)?.validationMetadatas
 const schemas = validationMetadatasToSchemas(metadata)
 
 describe('decorators', () => {

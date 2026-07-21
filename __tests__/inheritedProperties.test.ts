@@ -1,4 +1,3 @@
-// tslint:disable:no-submodule-imports
 import {
   Contains,
   getFromContainer,
@@ -11,7 +10,6 @@ import {
   MetadataStorage,
   MinLength,
 } from 'class-validator'
-import _get from 'lodash.get'
 
 import {
   JSONSchema,
@@ -29,7 +27,7 @@ class BaseContent {
   })
   @IsDefined()
   @IsEmail()
-  email: string
+  email!: string
 
   @JSONSchema({
     description: 'Password field',
@@ -37,11 +35,11 @@ class BaseContent {
   })
   @IsString()
   @IsOptional()
-  password: string
+  password?: string
 
   @IsDefined()
   @IsMobilePhone('fi-FI')
-  phone: string
+  phone!: string
 }
 
 @JSONSchema({
@@ -50,28 +48,29 @@ class BaseContent {
 class User extends BaseContent {
   @MinLength(10)
   @MaxLength(20)
-  name: string
+  name!: string
 
   @JSONSchema({
     description: 'Password field - required!',
   })
   @MinLength(20)
   @IsDefined()
-  password: string
+  password!: string
 
   @JSONSchema({
     title: 'Mobile phone number',
   })
   @IsOptional()
-  phone: string
+  phone!: string
 
-  @Contains('hello') welcome: string
+  @Contains('hello') welcome!: string
 }
 
 // @ts-ignore: not referenced
 class Admin extends User {}
 
-const metadatas = _get(getFromContainer(MetadataStorage), 'validationMetadatas')
+// @ts-ignore
+const metadatas = getFromContainer(MetadataStorage).validationMetadatas
 
 describe('Inheriting validation decorators', () => {
   it('inherits and merges validation decorators from parent class', () => {

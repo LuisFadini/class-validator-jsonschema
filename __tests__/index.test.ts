@@ -1,4 +1,3 @@
-// tslint:disable:no-submodule-imports
 import {
   Allow,
   ArrayMaxSize,
@@ -19,49 +18,48 @@ import { ValidationMetadata } from 'class-validator/types/metadata/ValidationMet
 import { targetConstructorToSchema, validationMetadatasToSchemas } from '../src'
 
 class User {
-  @IsString() id: string
+  @IsString() id!: string
 
   @MinLength(5)
-  firstName: string
+  firstName!: string
 
   @IsOptional()
   @MaxLength(20, { each: true })
   @ArrayMaxSize(5)
   @ArrayNotContains(['admin'])
-  tags: string[]
+  tags?: string[]
 
-  @IsEmpty() empty: string
+  @IsEmpty() empty!: string
 
-  @IsObject() object: object
+  @IsObject() object!: object
 
   @IsNotEmptyObject()
   @IsOptional()
-  nonEmptyObject: {}
+  nonEmptyObject?: {}
 
   @Allow()
   any: unknown
 }
 
-// @ts-ignore: not referenced
 class Post {
   static schemaName = 'ChangedPost'
 
   @IsOptional()
   @ValidateNested()
-  user: User
+  user?: User
 
   @Length(2, 100)
   @IsOptional()
-  title: string
+  title?: string
 
   @IsBoolean()
   @IsOptional()
-  published: true
+  published?: true
 }
 
 describe('classValidatorConverter', () => {
   it('handles empty metadata', () => {
-    const emptyStorage: any = {
+    const emptyStorage: unknown = {
       constraintMetadatas: new Map(),
       validationMetadatas: new Map(),
       getTargetValidatorConstraints: () => [],
@@ -69,7 +67,7 @@ describe('classValidatorConverter', () => {
 
     expect(
       validationMetadatasToSchemas({
-        classValidatorMetadataStorage: emptyStorage,
+        classValidatorMetadataStorage: emptyStorage as MetadataStorage,
       })
     ).toEqual({})
   })

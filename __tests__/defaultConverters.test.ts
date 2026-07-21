@@ -1,6 +1,4 @@
-// tslint:disable:object-literal-sort-keys
 import * as validator from 'class-validator'
-import _get from 'lodash.get'
 
 import { validationMetadatasToSchemas } from '../src'
 
@@ -16,133 +14,135 @@ enum Role {
   User = 'user',
 }
 
-// @ts-ignore: not referenced
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class User {
   // Common validation decorators:
-  @validator.IsDefined() isDefined: string
-  @validator.Equals('x') equalsString: string
+  @validator.IsDefined() isDefined!: string
+  @validator.Equals('x') equalsString!: string
   @validator.Equals(123.23)
-  equalsNumber: number
+  equalsNumber!: number
   @validator.Equals({ someKey: 'x' })
-  equalsComplex: object
-  @validator.NotEquals('x') notEqualsString: string
+  equalsComplex!: object
+  @validator.NotEquals('x') notEqualsString!: string
   @validator.NotEquals(123.23)
-  notEqualsNumber: number
+  notEqualsNumber!: number
   @validator.NotEquals({ someKey: 'x' })
-  notEqualsComplex: object
+  notEqualsComplex!: object
   @validator.IsEmpty() isEmpty?: string
-  @validator.IsNotEmpty() isNotEmpty: string
+  @validator.IsNotEmpty() isNotEmpty!: string
   @validator.IsIn([])
-  isInEmpty: string
+  isInEmpty!: string
   @validator.IsIn(['x', 'y'])
-  isInString: string
+  isInString!: string
   @validator.IsIn([1, 2])
-  isInNumber: number
+  isInNumber!: number
   @validator.IsIn([Post, Comment])
-  isInClass: Post | Comment
+  isInClass!: Post | Comment
   @validator.IsNotIn(['x', 'y'])
-  isNotIn: string
+  isNotIn!: string
 
   // Type validation decorators:
-  @validator.IsBoolean() isBoolean: boolean
-  @validator.IsDate() isDate: Date
-  @validator.IsString() isString: string
-  @validator.IsNumber() isNumber: number
-  @validator.IsInt() isInt: number
-  @validator.IsArray() isArray: any[]
-  @validator.IsEnum(PostType) isEnum: PostType
-  @validator.IsEnum(Role) isEnumWithValue: Role
+  @validator.IsBoolean() isBoolean!: boolean
+  @validator.IsDate() isDate!: Date
+  @validator.IsString() isString!: string
+  @validator.IsNumber() isNumber!: number
+  @validator.IsInt() isInt!: number
+  @validator.IsArray() isArray!: unknown[]
+  @validator.IsEnum(PostType) isEnum!: PostType
+  @validator.IsEnum(Role) isEnumWithValue!: Role
 
   // Number validation decorators:
   @validator.IsDivisibleBy(4)
-  isDivisibleByInt: number
+  isDivisibleByInt!: number
   @validator.IsDivisibleBy(1.1)
-  isDivisibleByFloat: number
-  @validator.IsPositive() isPositive: number
-  @validator.IsNegative() isNegative: number
+  isDivisibleByFloat!: number
+  @validator.IsPositive() isPositive!: number
+  @validator.IsNegative() isNegative!: number
   @validator.Max(10)
-  max: number
+  max!: number
   @validator.Min(1)
-  min: number
+  min!: number
 
   // Date validation decorators:
   @validator.MinDate(new Date('2017'))
-  minDate: Date
+  minDate!: Date
   @validator.MaxDate(new Date('2017'))
-  maxDate: Date
+  maxDate!: Date
 
   // String-type validation decorators:
-  @validator.IsBooleanString() isBooleanString: string
-  @validator.IsDateString() isDateString: string
-  @validator.IsNumberString() isNumberString: string
+  @validator.IsBooleanString() isBooleanString!: string
+  @validator.IsDateString() isDateString!: string
+  @validator.IsNumberString() isNumberString!: string
 
   // String validation decorators:
-  @validator.Contains('seed') contains: string
-  @validator.NotContains('seed') notContains: string
-  @validator.IsAlpha() isAlpha: string
-  @validator.IsAlphanumeric() isAlphanumeric: string
-  @validator.IsAscii() isAscii: string
-  @validator.IsBase64() isBase64: string
+  @validator.Contains('seed') contains!: string
+  @validator.NotContains('seed') notContains!: string
+  @validator.IsAlpha() isAlpha!: string
+  @validator.IsAlphanumeric() isAlphanumeric!: string
+  @validator.IsAscii() isAscii!: string
+  @validator.IsBase64() isBase64!: string
   @validator.IsByteLength(1, 10)
-  isByteLength: string
-  @validator.IsCreditCard() isCreditCard: string
-  @validator.IsCurrency() isCurrency: string
-  @validator.IsEmail() isEmail: string
-  @validator.IsFQDN() isFQDN: string
-  @validator.IsFullWidth() isFullWidth: string
-  @validator.IsHalfWidth() isHalfWidth: string
-  @validator.IsVariableWidth() isVariableWidth: string
-  @validator.IsHexColor() isHexColor: string
-  @validator.IsHexadecimal() isHexadecimal: string
-  @validator.IsIP() isIPv4: string
-  @validator.IsIP('6') isIPv6: string
-  @validator.IsISBN() isISBN: string
-  @validator.IsISIN() isISIN: string
-  @validator.IsISO8601() isISO8601: string
-  @validator.IsJSON() isJSON: string
-  @validator.IsLowercase() isLowerCase: string
-  @validator.IsMobilePhone('en-GB') isMobilePhone: string
-  @validator.IsMongoId() isMongoId: string
-  @validator.IsMultibyte() isMultibyte: string
-  @validator.IsSurrogatePair() isSurrogatePair: string
-  @validator.IsUrl() isUrl: string
-  @validator.IsUUID() isUUID: string
-  @validator.IsUppercase() isUpperCase: string
+  isByteLength!: string
+  @validator.IsCreditCard() isCreditCard!: string
+  @validator.IsCurrency() isCurrency!: string
+  @validator.IsEmail() isEmail!: string
+  @validator.IsFQDN() isFQDN!: string
+  @validator.IsFullWidth() isFullWidth!: string
+  @validator.IsHalfWidth() isHalfWidth!: string
+  @validator.IsVariableWidth() isVariableWidth!: string
+  @validator.IsHexColor() isHexColor!: string
+  @validator.IsHexadecimal() isHexadecimal!: string
+  @validator.IsIP() isIPv4!: string
+  @validator.IsIP('6') isIPv6!: string
+  @validator.IsISBN() isISBN!: string
+  @validator.IsISIN() isISIN!: string
+  @validator.IsISO8601() isISO8601!: string
+  @validator.IsJSON() isJSON!: string
+  @validator.IsLowercase() isLowerCase!: string
+  @validator.IsMobilePhone('en-GB') isMobilePhone!: string
+  @validator.IsMongoId() isMongoId!: string
+  @validator.IsMultibyte() isMultibyte!: string
+  @validator.IsSurrogatePair() isSurrogatePair!: string
+  @validator.IsUrl() isUrl!: string
+  @validator.IsUUID() isUUID!: string
+  @validator.IsUppercase() isUpperCase!: string
   @validator.Length(1)
-  length: string
+  length!: string
   @validator.Length(1, 10)
-  lengthWithMax: string
+  lengthWithMax!: string
   @validator.MinLength(1)
-  minLength: string
+  minLength!: string
   @validator.MaxLength(10)
-  maxLength: string
+  maxLength!: string
   @validator.Matches(/\d[a-zA-Z]+/)
-  matches: string
-  @validator.IsMilitaryTime() isMilitaryTime: string
+  matches!: string
+  @validator.IsMilitaryTime() isMilitaryTime!: string
 
   // Array validation decorators:
   @validator.ArrayContains(['x', 'y'])
-  arrayContainsString: string[]
+  arrayContainsString!: string[]
   @validator.ArrayContains([true, 1])
-  arrayContainsVarious: any[]
+  arrayContainsVarious!: unknown[]
   @validator.ArrayContains(['x', { someKey: 'y' }])
-  arrayContainsComplex: any[]
+  arrayContainsComplex!: unknown[]
   @validator.ArrayNotContains(['x', 'y'])
-  arrayNotContains: string[]
+  arrayNotContains!: string[]
   @validator.ArrayNotContains([{ someKey: 'x' }, 3])
-  arrayNotContainsComplex: any[]
-  @validator.ArrayNotEmpty() arrayNotEmpty: any[]
+  arrayNotContainsComplex!: unknown[]
+  @validator.ArrayNotEmpty() arrayNotEmpty!: unknown[]
   @validator.ArrayMinSize(1)
-  arrayMinSize: any[]
+  arrayMinSize!: unknown[]
   @validator.ArrayMaxSize(10)
-  arrayMaxSize: any[]
-  @validator.ArrayUnique() arrayUnique: any[]
+  arrayMaxSize!: unknown[]
+  @validator.ArrayUnique() arrayUnique!: unknown[]
 }
 
-const metadata = _get(
-  validator.getFromContainer(validator.MetadataStorage),
-  'validationMetadatas'
-)
+const metadata = validator.getFromContainer(
+  validator.MetadataStorage
+  // @ts-ignore
+).validationMetadatas
+
 const schemas = validationMetadatasToSchemas(metadata)
 
 describe('defaultConverters', () => {

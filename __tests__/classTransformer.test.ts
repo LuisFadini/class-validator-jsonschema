@@ -1,4 +1,3 @@
-// tslint:disable:no-submodule-imports
 import { Type } from 'class-transformer'
 import {
   ArrayMinSize,
@@ -10,34 +9,34 @@ import {
 } from 'class-validator'
 
 import { validationMetadatasToSchemas } from '../src'
-const { defaultMetadataStorage } = require('class-transformer/cjs/storage')
+import { defaultMetadataStorage } from 'class-transformer/cjs/storage'
 
 class ValidationError {
   @IsString({ each: true })
-  path: string[]
+  path!: string[]
 
   @IsString({ each: true })
-  constraints: string[]
+  constraints!: string[]
 }
 
 export class ValidationErrorModel {
-  @IsString() name: 'ValidationError'
+  @IsString() name!: 'ValidationError'
 
   @Type(() => ValidationError)
   @ValidateNested({ each: true })
-  errorList: ValidationError[]
+  errorList!: ValidationError[]
 
   @ArrayMinSize(1)
   @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => ValidationError)
-  anotherErrorList: ValidationError[]
+  anotherErrorList?: ValidationError[]
 }
 
 describe('class-transformer compatibility', () => {
   it('ignores @Type decorator when classTransformerMetadataStorage option is not defined', () => {
     // @ts-ignore
-    const metadata = getFromContainer(MetadataStorage).validationMetadatas
+    const _metadata = getFromContainer(MetadataStorage).validationMetadatas
     const schemas = validationMetadatasToSchemas()
 
     expect(schemas.ValidationErrorModel).toEqual({
@@ -66,7 +65,7 @@ describe('class-transformer compatibility', () => {
 
   it('applies @Type decorator when classTransformerMetadataStorage option is defined', () => {
     // @ts-ignore
-    const metadata = getFromContainer(MetadataStorage).validationMetadatas
+    const _metadata = getFromContainer(MetadataStorage).validationMetadatas
     const schemas = validationMetadatasToSchemas({
       classTransformerMetadataStorage: defaultMetadataStorage,
     })

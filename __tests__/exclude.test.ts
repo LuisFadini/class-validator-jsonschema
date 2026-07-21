@@ -1,8 +1,7 @@
-// tslint:disable:no-submodule-imports
 import { Exclude } from 'class-transformer'
 import { Allow, IsOptional, IsString } from 'class-validator'
 import { validationMetadatasToSchemas } from '../src'
-const { defaultMetadataStorage } = require('class-transformer/cjs/storage')
+import { defaultMetadataStorage } from 'class-transformer/cjs/storage'
 
 class Parent {
   @Allow()
@@ -16,10 +15,11 @@ class Parent {
   excludedInUser: unknown
 }
 
-// @ts-ignore unused
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class User extends Parent {
   @IsString()
-  id: string
+  id!: string
 
   @Exclude()
   @Allow()

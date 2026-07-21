@@ -1,17 +1,17 @@
-// tslint:disable:no-submodule-imports
 import { Expose } from 'class-transformer'
 import { IsString } from 'class-validator'
 import { validationMetadatasToSchemas } from '../src'
-const { defaultMetadataStorage } = require('class-transformer/cjs/storage')
+import { defaultMetadataStorage } from 'class-transformer/cjs/storage'
 
-// @ts-ignore unused
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class User {
   @IsString()
-  id: string
+  id!: string
 
   @Expose({ name: 'domain_id' })
   @IsString()
-  domainId: string
+  domainId!: string
 }
 
 describe('Expose() decorator', () => {
