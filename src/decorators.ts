@@ -1,4 +1,3 @@
-// tslint:disable:ban-types
 import type { ReferenceObject, SchemaObject } from 'openapi3-ts'
 import 'reflect-metadata'
 

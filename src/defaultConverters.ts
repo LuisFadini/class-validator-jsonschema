@@ -1,4 +1,3 @@
-// tslint:disable:no-submodule-imports
 import * as cv from 'class-validator'
 import type { ValidationMetadata } from 'class-validator/types/metadata/ValidationMetadata'
 import type { ReferenceObject, SchemaObject } from 'openapi3-ts'
