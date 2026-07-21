@@ -1,6 +1,6 @@
 import * as cv from 'class-validator'
 import type { ValidationMetadata } from 'class-validator/types/metadata/ValidationMetadata'
-import type { ReferenceObject, SchemaObject } from 'openapi3-ts'
+import type { ReferenceObject, SchemaObject } from 'openapi3-ts/oas30'
 import 'reflect-metadata'
 
 import { IOptions } from './options'
@@ -125,11 +125,13 @@ export const defaultConverters: ISchemaConverters = {
     type: 'number',
   }),
   [cv.IS_POSITIVE]: {
-    exclusiveMinimum: 0,
+    minimum: 0,
+    exclusiveMinimum: true,
     type: 'number',
   },
   [cv.IS_NEGATIVE]: {
-    exclusiveMaximum: 0,
+    maximum: 0,
+    exclusiveMaximum: true,
     type: 'number',
   },
   [cv.MIN]: (meta) => ({

@@ -1,4 +1,4 @@
-import type { ReferenceObject, SchemaObject } from 'openapi3-ts'
+import type { ReferenceObject, SchemaObject } from 'openapi3-ts/oas30'
 import 'reflect-metadata'
 
 import { IOptions } from './options'
