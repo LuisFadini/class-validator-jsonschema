@@ -1,14 +1,13 @@
 // tslint:disable:no-submodule-imports ban-types
 import * as cv from 'class-validator'
 import { ValidationMetadata } from 'class-validator/types/metadata/ValidationMetadata'
-import _groupBy from 'lodash.groupby'
-import _merge from 'lodash.merge'
 import type { ReferenceObject, SchemaObject } from 'openapi3-ts'
 
 import { getMetadataSchema } from './decorators'
 import { defaultConverters } from './defaultConverters'
 import { defaultOptions, IOptions } from './options'
 import { ExposeMetadata } from 'class-transformer'
+import { deepMerge } from './utils/deepMerge'
 
 export { JSONSchema } from './decorators'
 
@@ -48,15 +47,15 @@ export function validationMetadataArrayToSchemas(
 
   const schemas: { [key: string]: SchemaObject } = {}
   Object.entries(
-    _groupBy(
+    Object.groupBy(
       metadatas,
       ({ target }) =>
-        target[options.schemaNameField as keyof typeof target] ??
-        (target as Function).name
+        (target[options.schemaNameField as keyof typeof target] ??
+          (target as Function).name) as PropertyKey
     )
   ).forEach(([key, ownMetas]) => {
-    const target = ownMetas[0].target as Function
-    const metas = ownMetas
+    const target = ownMetas![0].target as Function
+    const metas = ownMetas!
       .concat(getInheritedMetadatas(target, metadatas))
       .filter(
         (propMeta) =>
@@ -88,9 +87,9 @@ export function validationMetadataArrayToSchemas(
 
     const properties: { [name: string]: ReferenceObject | SchemaObject } = {}
 
-    Object.entries(_groupBy(metas, 'propertyName')).forEach(
+    Object.entries(Object.groupBy(metas, (item) => item.propertyName)).forEach(
       ([propName, propMetas]) => {
-        const schema = applyConverters(propMetas, options)
+        const schema = applyConverters(propMetas!, options)
         properties[propName] = applyDecorators(
           schema,
           target,
@@ -259,7 +258,7 @@ function applyConverters(
     return meta.each ? { items, type: 'array' } : items
   }
 
-  return _merge({}, ...propertyMetadatas.map(convert))
+  return deepMerge({}, ...(propertyMetadatas.map(convert) as SchemaObject[]))
 }
 
 /** Check whether property is excluded with class-transformer `@Exclude` decorator. */
@@ -286,7 +285,7 @@ function applyDecorators(
   const additionalSchema = getMetadataSchema(target.prototype, propertyName)
   return typeof additionalSchema === 'function'
     ? additionalSchema(schema, options)
-    : _merge({}, schema, additionalSchema)
+    : deepMerge({}, schema, additionalSchema)
 }
 
 /**
@@ -314,10 +313,10 @@ function getRequiredPropNames(
     )
   }
 
-  return Object.entries(_groupBy(metadatas, (m) => m.propertyName))
+  return Object.entries(Object.groupBy(metadatas, (m) => m.propertyName))
     .filter(([_, metas]) => {
-      const own = metas.filter((m) => m.target === target)
-      const inherited = metas.filter((m) => m.target !== target)
+      const own = metas!.filter((m) => m.target === target)
+      const inherited = metas!.filter((m) => m.target !== target)
       return options.skipMissingProperties
         ? isDefined(own) || (!isOptional(own) && isDefined(inherited))
         : !(isOptional(own) || isOptional(inherited))
