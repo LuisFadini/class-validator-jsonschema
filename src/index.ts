@@ -53,7 +53,7 @@ export function validationMetadataArrayToSchemas(
           (target as Function).name) as PropertyKey
     )
   ).forEach(([key, ownMetas]) => {
-    const target = ownMetas![0].target as Function
+    const target = ownMetas![0]!.target as Function
     const metas = ownMetas!
       .concat(getInheritedMetadatas(target, metadatas))
       .filter(
@@ -130,7 +130,7 @@ function getTargetConstructorSchema(
   if (!targetConstructor.name) {
     return {}
   } else if (schemas[targetConstructor.name]) {
-    return schemas[targetConstructor.name]
+    return schemas[targetConstructor.name]!
   } else {
     return getTargetConstructorSchema(
       schemas,
@@ -188,7 +188,7 @@ function populateMetadatasWithConstraints(
         meta.constraintCls
       )
       if (constraint.length > 0) {
-        return { ...meta, type: constraint[0].name }
+        return { ...meta, type: constraint[0]!.name }
       }
     }
     return { ...meta }

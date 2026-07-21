@@ -1,27 +1,35 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "moduleResolution": "node16",
-    "module": "node16",
-    "importHelpers": true,
-    "inlineSourceMap": true,
-    "listFiles": false,
-    "traceResolution": false,
-    "pretty": true,
-    "types": ["node", "jest"],
-    "lib": ["es6", "ES2024.Object"],
+    "target": "ES2022",
+    "module": "nodenext",
+
+    "lib": ["ES2024"],
+
+    "rootDir": "./src",
+    "outDir": "./build",
+
+    "types": ["node"],
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    "forceConsistentCasingInFileNames": true,
+
     "isolatedModules": true,
+
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+
     "esModuleInterop": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "skipLibCheck": true,
+
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
   },
-  "include": ["src/**/*", "__tests__/**/*"],
-  "compileOnSave": false
+  "include": ["src"]
 }
