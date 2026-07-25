@@ -1,0 +1,65 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+    cooldown:
+      default-days: 3
+
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+    versioning-strategy: increase
+
+    open-pull-requests-limit: 10
+
+    labels:
+      - dependencies
+
+    groups:
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "typescript-eslint"
+          - "@typescript-eslint/*"
+
+      prettier:
+        patterns:
+          - "prettier"
+          - "eslint-config-prettier"
+          - "eslint-plugin-prettier"
+
+      typescript:
+        patterns:
+          - "typescript"
+          - "@typescript/*"
+
+      jest:
+        patterns:
+          - "jest"
+          - "@types/jest"
+          - "ts-jest"
+
+      types:
+        patterns:
+          - "@types/*"
+
+      runtime:
+        dependency-type: "production"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+    labels:
+      - dependencies
