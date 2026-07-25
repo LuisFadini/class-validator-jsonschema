@@ -55,13 +55,13 @@ class User extends BaseContent {
   })
   @MinLength(20)
   @IsDefined()
-  password!: string
+  declare password: string
 
   @JSONSchema({
     title: 'Mobile phone number',
   })
   @IsOptional()
-  phone!: string
+  declare phone: string
 
   @Contains('hello') welcome!: string
 }
@@ -142,8 +142,8 @@ describe('Inheriting validation decorators', () => {
       skipMissingProperties: true,
     })
 
-    expect(schemas.BaseContent.required).toEqual(['email', 'phone'])
-    expect(schemas.User.required).toEqual(['password', 'email'])
+    expect(schemas.BaseContent!.required).toEqual(['email', 'phone'])
+    expect(schemas.User!.required).toEqual(['password', 'email'])
   })
 
   it('inherits and merges validation decorators from multiple parent classes and empty child class', () => {

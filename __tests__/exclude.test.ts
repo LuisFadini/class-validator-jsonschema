@@ -27,7 +27,7 @@ class User extends Parent {
 
   @Exclude()
   @IsOptional()
-  excludedInUser: unknown
+  declare excludedInUser: unknown
 }
 
 describe('Exclude() decorator', () => {

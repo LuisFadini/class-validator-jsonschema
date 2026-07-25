@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "ES2022",
     "module": "nodenext",
 
@@ -31,5 +32,13 @@
     "declaration": true,
     "declarationMap": true
   },
+  "references": [
+    {
+      "path": "./tsconfig.test.json"
+    },
+    {
+      "path": "./tsconfig.release.json"
+    }
+  ],
   "include": ["src"]
 }

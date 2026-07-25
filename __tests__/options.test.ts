@@ -39,7 +39,7 @@ const defaultSchemas = validationMetadatasToSchemas(metadata)
 
 describe('options', () => {
   it('sets default refPointerPrefix', () => {
-    expect(defaultSchemas.Post.properties!.user).toEqual({
+    expect(defaultSchemas.Post!.properties!.user).toEqual({
       $ref: '#/definitions/User',
     })
   })
@@ -49,13 +49,13 @@ describe('options', () => {
       refPointerPrefix: '#/components/schema/',
     })
 
-    expect(schemas.Post.properties!.user).toEqual({
+    expect(schemas.Post!.properties!.user).toEqual({
       $ref: '#/components/schema/User',
     })
   })
 
   it('overwrites default converters with additionalConverters', () => {
-    expect(defaultSchemas.User.properties).toEqual({
+    expect(defaultSchemas.User!.properties).toEqual({
       email: { format: 'email', type: 'string' },
       id: {
         type: 'string',
@@ -81,7 +81,7 @@ describe('options', () => {
       },
     })
 
-    expect(schemas.User.properties).toEqual({
+    expect(schemas.User!.properties).toEqual({
       email: { format: 'email', type: 'string' },
       id: {
         description: 'A string value',
@@ -96,13 +96,13 @@ describe('options', () => {
   })
 
   it('handles required properties as per skipMissingProperties option', () => {
-    expect(defaultSchemas.User.required).toEqual(['id', 'email'])
+    expect(defaultSchemas.User!.required).toEqual(['id', 'email'])
     expect(defaultSchemas.Post).not.toHaveProperty('required')
 
     const schemas = validationMetadatasToSchemas({
       skipMissingProperties: true,
     })
-    expect(schemas.User.required).toEqual(['id'])
+    expect(schemas.User!.required).toEqual(['id'])
     expect(defaultSchemas.Post).not.toHaveProperty('required')
   })
 })

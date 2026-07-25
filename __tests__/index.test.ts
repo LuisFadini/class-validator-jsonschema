@@ -95,7 +95,7 @@ describe('classValidatorConverter', () => {
     const schemas = validationMetadatasToSchemas({
       classValidatorMetadataStorage: storage,
     })
-    expect(schemas.User.properties!.id).toEqual({ type: 'string' })
+    expect(schemas.User!.properties!.id).toEqual({ type: 'string' })
   })
 
   it('combines converted class-validator metadata into JSON Schemas', () => {

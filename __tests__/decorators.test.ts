@@ -48,15 +48,15 @@ const schemas = validationMetadatasToSchemas(metadata)
 
 describe('decorators', () => {
   it('merges class-level schema keywords from decorator value', () => {
-    expect(schemas.User.deprecated).toBe(true)
-    expect(schemas.User.description).toEqual('A User object')
-    expect(schemas.User.example).toEqual({ id: '123' })
-    expect(schemas.User.required).toEqual(['id', 'tags'])
-    expect(schemas.User.type).toEqual('object')
+    expect(schemas.User!.deprecated).toBe(true)
+    expect(schemas.User!.description).toEqual('A User object')
+    expect(schemas.User!.example).toEqual({ id: '123' })
+    expect(schemas.User!.required).toEqual(['id', 'tags'])
+    expect(schemas.User!.type).toEqual('object')
   })
 
   it('merges property-level schema keywords from decorator value', () => {
-    expect(schemas.User.properties).toEqual({
+    expect(schemas.User!.properties).toEqual({
       empty: {
         anyOf: [{ type: 'null' }, { type: 'string', const: '' }],
       },
