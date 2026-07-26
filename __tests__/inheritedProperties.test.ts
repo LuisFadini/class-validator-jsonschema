@@ -16,6 +16,7 @@ import {
   targetConstructorToSchema,
   validationMetadatasToSchemas,
 } from '../src'
+import { describe, it, expect } from 'vitest'
 
 @JSONSchema({
   description: 'Contains email, password and phone',

@@ -20,11 +20,6 @@ export default defineConfig([
   ts.configs.recommended,
 
   {
-    files: ['__tests__/**/*.ts'],
-    languageOptions: { globals: { ...globals.node, ...globals.jest } },
-  },
-
-  {
     rules: {
       'max-classes-per-file': 'off',
       '@typescript-eslint/explicit-member-accessibility': 'off',

@@ -16,6 +16,7 @@ import {
 } from 'class-validator'
 import { ValidationMetadata } from 'class-validator/types/metadata/ValidationMetadata'
 import { targetConstructorToSchema, validationMetadatasToSchemas } from '../src'
+import { describe, it, expect } from 'vitest'
 
 class User {
   @IsString() id!: string

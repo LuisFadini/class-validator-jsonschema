@@ -19,8 +19,8 @@
     "prepare": "pnpm build",
     "lint": "prettier --check . && eslint .",
     "lint:fix": "prettier --write . && eslint . --fix",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "openapi3-ts": "^4.6.0",
@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/jest": "^30.0.0",
     "@types/node": "^26.1.1",
     "@types/validator": "^13.7.2",
     "@typescript/native": "npm:typescript@^7.0.2",
@@ -38,11 +37,10 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
     "globals": "^17.7.0",
-    "jest": "^30.4.2",
     "prettier": "^3.9.6",
-    "ts-jest": "^29.4.12",
     "typescript": "npm:@typescript/typescript6@^6.0.2",
-    "typescript-eslint": "^8.65.0"
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "class-transformer": "0.5.1",

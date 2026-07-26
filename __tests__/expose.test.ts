@@ -2,6 +2,7 @@ import { Expose } from 'class-transformer'
 import { IsString } from 'class-validator'
 import { validationMetadatasToSchemas } from '../src'
 import { defaultMetadataStorage } from 'class-transformer/cjs/storage'
+import { describe, it, expect } from 'vitest'
 
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

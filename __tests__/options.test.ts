@@ -12,6 +12,7 @@ import {
 } from 'class-validator'
 
 import { validationMetadatasToSchemas } from '../src'
+import { describe, it, expect } from 'vitest'
 
 class User {
   @IsDefined()

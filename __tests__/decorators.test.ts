@@ -9,6 +9,7 @@ import {
 } from 'class-validator'
 
 import { JSONSchema, validationMetadatasToSchemas } from '../src'
+import { describe, it, expect } from 'vitest'
 
 @JSONSchema({
   deprecated: true,

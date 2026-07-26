@@ -1,6 +1,7 @@
 import * as validator from 'class-validator'
 
 import { validationMetadatasToSchemas } from '../src'
+import { describe, it, expect } from 'vitest'
 
 class Post {}
 class Comment {}

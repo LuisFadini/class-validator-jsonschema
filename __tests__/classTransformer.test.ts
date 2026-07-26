@@ -10,6 +10,7 @@ import {
 
 import { validationMetadatasToSchemas } from '../src'
 import { defaultMetadataStorage } from 'class-transformer/cjs/storage'
+import { describe, it, expect } from 'vitest'
 
 class ValidationError {
   @IsString({ each: true })

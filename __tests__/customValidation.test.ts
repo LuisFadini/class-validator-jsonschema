@@ -7,6 +7,7 @@ import {
 } from 'class-validator'
 
 import { validationMetadatasToSchemas } from '../src'
+import { describe, it, expect } from 'vitest'
 
 @ValidatorConstraint()
 export class CustomTextLength implements ValidatorConstraintInterface {
