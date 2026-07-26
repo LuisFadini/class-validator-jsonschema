@@ -39,11 +39,10 @@ updates:
           - "typescript"
           - "@typescript/*"
 
-      jest:
+      vitest:
         patterns:
-          - "jest"
-          - "@types/jest"
-          - "ts-jest"
+          - "vitest"
+          - "@vitest/*"
 
       types:
         patterns:
