@@ -23,7 +23,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "openapi3-ts": "^4.6.0",
+    "openapi3-ts": "^4.6.1",
     "reflect-metadata": "^0.2.2"
   },
   "devDependencies": {
